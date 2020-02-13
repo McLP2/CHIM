@@ -1,0 +1,367 @@
+object FMcontrol: TFMcontrol
+  Left = 422
+  Height = 542
+  Top = 140
+  Width = 929
+  Caption = 'CHIM - Create Hidden Images Magically'
+  ClientHeight = 522
+  ClientWidth = 929
+  Menu = MainMenu1
+  LCLVersion = '1.4.0.4'
+  object GBGenerate: TGroupBox
+    AnchorSideBottom.Control = GBExport
+    Left = 24
+    Height = 223
+    Top = 16
+    Width = 384
+    Anchors = [akTop, akLeft, akBottom]
+    BorderSpacing.Bottom = 18
+    Caption = 'Generieroptionen'
+    ClientHeight = 203
+    ClientWidth = 380
+    TabOrder = 0
+    object SEHeight: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 48
+      Width = 82
+      MaxValue = 2000000000
+      TabOrder = 0
+      Value = 120
+    end
+    object SEWidth: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 8
+      Width = 82
+      MaxValue = 2000000000
+      TabOrder = 1
+      Value = 200
+    end
+    object SEPercentage: TSpinEdit
+      Left = 152
+      Height = 23
+      Top = 88
+      Width = 64
+      Font.Color = clGreen
+      OnChange = SEPercentageChange
+      ParentFont = False
+      TabOrder = 2
+      Value = 50
+    end
+    object CBPixelcolor: TColorButton
+      Left = 152
+      Height = 25
+      Top = 128
+      Width = 25
+      BorderWidth = 0
+      ButtonColorSize = 32
+      ButtonColor = clBlack
+    end
+    object FEImagetohide: TFileNameEdit
+      Left = 152
+      Height = 23
+      Top = 168
+      Width = 192
+      DialogTitle = 'Bild zum Verstecken wählen'
+      DialogOptions = [ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail, ofAutoPreview]
+      Filter = 'Bild|*.png;*.bmp;*.jpg;*.jpeg;*.tiff;*.gif|Portable Network Graphics|*.png|Bitmap|*.bmp|JPEG|*.jpg;*.jpeg|TIFF|*.tiff|GIF|*.gif'
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 3
+      OnChange = FEImagetohideChange
+    end
+    object LBWidth: TLabel
+      Left = 16
+      Height = 15
+      Top = 11
+      Width = 93
+      Caption = 'Pixel in der Breite:'
+      ParentColor = False
+    end
+    object LBHeight: TLabel
+      Left = 16
+      Height = 15
+      Top = 51
+      Width = 92
+      Caption = 'Pixel in der Höhe:'
+      ParentColor = False
+    end
+    object LBPercentage: TLabel
+      Left = 16
+      Height = 15
+      Top = 91
+      Width = 95
+      Caption = 'Ausfüllung (in %):'
+      ParentColor = False
+    end
+    object LBPixelcolor: TLabel
+      Left = 16
+      Height = 15
+      Top = 131
+      Width = 54
+      Caption = 'Pixelfarbe:'
+      ParentColor = False
+    end
+    object LBImagetohide: TLabel
+      Left = 16
+      Height = 15
+      Top = 171
+      Width = 108
+      Caption = 'Bild zum Verstecken:'
+      ParentColor = False
+    end
+  end
+  object GBExport: TGroupBox
+    AnchorSideBottom.Control = StatusBar1
+    Left = 24
+    Height = 220
+    Top = 257
+    Width = 384
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Bottom = 22
+    Caption = 'Exportoptionen'
+    ClientHeight = 200
+    ClientWidth = 380
+    TabOrder = 1
+    object FEEncrypted: TFileNameEdit
+      Left = 152
+      Height = 23
+      Top = 88
+      Width = 191
+      DialogTitle = 'Verschlüsselt speichern als'
+      DialogOptions = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
+      Filter = 'Portable Network Graphics|*.png|Bitmap|*.bmp|JPEG|*.jpg;*.jpeg|TIFF|*.tiff|GIF|*.gif'
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+      OnChange = FEEncryptedChange
+    end
+    object LBHidden: TLabel
+      Left = 16
+      Height = 15
+      Top = 91
+      Width = 104
+      Caption = 'Verschlüsseltes Bild:'
+      ParentColor = False
+    end
+    object LBImageforoverlay: TLabel
+      Left = 16
+      Height = 15
+      Top = 51
+      Width = 130
+      Caption = 'Überlagerung (optional):'
+      ParentColor = False
+    end
+    object FEImageforoverlay: TFileNameEdit
+      Left = 153
+      Height = 23
+      Top = 48
+      Width = 191
+      DialogTitle = 'Bild zur Überlagerung wählen'
+      DialogOptions = [ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail, ofAutoPreview]
+      Filter = 'Bild|*.png;*.bmp;*.jpg;*.jpeg;*.tiff;*.gif|Portable Network Graphics|*.png|Bitmap|*.bmp|JPEG|*.jpg;*.jpeg|TIFF|*.tiff|GIF|*.gif'
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 1
+      OnChange = FEImageforoverlayChange
+    end
+    object BTExport: TButton
+      Left = 232
+      Height = 25
+      Top = 165
+      Width = 112
+      Caption = 'Bild Speichern'
+      Enabled = False
+      OnClick = SaveImages
+      TabOrder = 2
+    end
+    object LBMultipier: TLabel
+      Left = 16
+      Height = 15
+      Top = 11
+      Width = 73
+      Caption = 'Größenfaktor:'
+      ParentColor = False
+    end
+    object SEMultiplier: TSpinEdit
+      Left = 153
+      Height = 23
+      Top = 8
+      Width = 81
+      MaxValue = 1000
+      MinValue = 1
+      TabOrder = 3
+      Value = 10
+    end
+    object LBHidden1: TLabel
+      Left = 16
+      Height = 15
+      Top = 131
+      Width = 71
+      Caption = 'Schlüsselbild:'
+      ParentColor = False
+    end
+    object FEDecrypter: TFileNameEdit
+      Left = 153
+      Height = 23
+      Top = 128
+      Width = 191
+      DialogTitle = 'Schlüssel speichern als'
+      DialogOptions = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
+      Filter = 'Portable Network Graphics|*.png|Bitmap|*.bmp|JPEG|*.jpg;*.jpeg|TIFF|*.tiff|GIF|*.gif'
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 4
+      OnChange = FEDecrypterChange
+    end
+  end
+  object GBPreview: TGroupBox
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = StatusBar1
+    Left = 432
+    Height = 461
+    Top = 16
+    Width = 473
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 22
+    Caption = 'Vorschau'
+    ClientHeight = 441
+    ClientWidth = 469
+    TabOrder = 2
+    object IMOutput: TImage
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 16
+      Height = 394
+      Top = 8
+      Width = 440
+      Anchors = [akTop, akLeft, akRight, akBottom]
+    end
+    object CBAutopreview: TCheckBox
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 248
+      Height = 19
+      Top = 412
+      Width = 88
+      Anchors = [akRight, akBottom]
+      Caption = 'Automatisch'
+      Enabled = False
+      TabOrder = 0
+    end
+    object BTPreview: TButton
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 344
+      Height = 25
+      Top = 409
+      Width = 112
+      Anchors = [akRight, akBottom]
+      Caption = 'Aktualisieren'
+      OnClick = Repaint
+      TabOrder = 1
+    end
+    object IMOverlay: TImage
+      AnchorSideLeft.Control = GBPreview
+      AnchorSideBottom.Control = GBPreview
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 26
+      Top = 415
+      Width = 24
+      Anchors = [akLeft, akBottom]
+      Visible = False
+    end
+    object IMHide: TImage
+      AnchorSideLeft.Control = IMOverlay
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideBottom.Control = GBPreview
+      AnchorSideBottom.Side = asrBottom
+      Left = 24
+      Height = 26
+      Top = 415
+      Width = 24
+      Anchors = [akLeft, akBottom]
+      Visible = False
+    end
+    object IMExport1: TImage
+      Left = 48
+      Height = 37
+      Top = 404
+      Width = 40
+      Visible = False
+    end
+    object IMExport2: TImage
+      Left = 88
+      Height = 37
+      Top = 404
+      Width = 40
+      Visible = False
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 499
+    Width = 929
+    Panels = <    
+      item
+        Text = 'Bereit.'
+        Width = 100
+      end>
+    SimplePanel = False
+  end
+  object MainMenu1: TMainMenu
+    left = 888
+    top = 440
+    object MBFile: TMenuItem
+      Caption = 'Datei'
+      object MIOpen: TMenuItem
+        Caption = 'Projekt Öffnen'
+      end
+      object MISave: TMenuItem
+        Caption = 'Projekt Speichern'
+      end
+      object MInone1: TMenuItem
+        Caption = '-'
+      end
+      object MIExport: TMenuItem
+        Caption = 'Bild Speichern'
+      end
+      object MIDecrypt: TMenuItem
+        Caption = 'Entschlüsseln'
+        object MIImport: TMenuItem
+          Caption = 'Bild öffnen'
+        end
+      end
+      object MInone2: TMenuItem
+        Caption = '-'
+      end
+      object MIClose: TMenuItem
+        Caption = 'Schließen'
+        OnClick = MICloseClick
+      end
+    end
+    object MBHelp: TMenuItem
+      Caption = 'Hilfe'
+      object MIAbout: TMenuItem
+        Caption = 'Über'
+      end
+    end
+  end
+end
