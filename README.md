@@ -3,3 +3,5 @@ Create Hidden Images Magically using printable Steganography. Just overlay the p
 The image to hide must be black and white.
 
 ![screenshot](screenshot.png)
+
+This was an old project of mine please dont take it seriously.
